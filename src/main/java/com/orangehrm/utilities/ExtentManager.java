@@ -35,6 +35,7 @@ public class ExtentManager {
 			spark.config().setTheme(Theme.STANDARD);
 
 			extent = new ExtentReports();
+			extent.attachReporter(spark);
 			// Adding System information
 
 			extent.setSystemInfo("Operating System", System.getProperty("os.name"));
@@ -45,7 +46,7 @@ public class ExtentManager {
 	}
 
 	// start the Test
-	public static ExtentTest statTest(String testName) {
+	public static ExtentTest startTest(String testName) {
 		ExtentTest extentTest = getReporter().createTest(testName);
 		test.set(extentTest);
 		return extentTest;
@@ -87,14 +88,16 @@ public class ExtentManager {
 
 	// Log a failure
 	public static void logfailureWithScreenshots(WebDriver driver, String logMessage, String Screenshotmessage) {
-		getTest().pass(logMessage);
+		String colorMessage = String.format("<span style='color:red;'>%s</span>", logMessage);
+		getTest().fail(colorMessage);
 		// log screenshots
 		attachScreenshot(driver, Screenshotmessage);
 	}
 
 	// Log skip
 	public static void logSkip(String logMessage) {
-		getTest().skip(logMessage);
+		String colorMessage = String.format("<span style='color:orange;'>%s</span>", logMessage);
+		getTest().skip(colorMessage);
 
 	}
 //Take a screenshot with date & time in the file
@@ -105,8 +108,8 @@ public class ExtentManager {
 		// Format date & Time for filename
 		String timeStamp = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").format(new Date());
 		// Saving the screenshot to a file
-		String DestPath = System.getProperty("user.dir") + "/src/test/resources/ExtentReport/screenshots"
-				+ screenshotName + "_" + timeStamp + ".png";
+		String DestPath = System.getProperty("user.dir") + "/src/test/resources/screenshots/" + screenshotName + "_"
+				+ timeStamp + ".png";
 		File finalPath = new File(DestPath);
 		try {
 			FileUtils.copyFile(src, finalPath);

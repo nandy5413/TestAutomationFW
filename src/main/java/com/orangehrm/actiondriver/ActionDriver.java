@@ -135,7 +135,7 @@ public class ActionDriver {
 	}
 
 	// Action4: Method to compare two text into an input field element-- return type
-	// to boolear
+	// to boolean
 	public boolean compareText(By by, String expectedText) {
 
 		try {
@@ -174,13 +174,18 @@ public class ActionDriver {
 	 * 
 	 * }
 	 */
+
 	public boolean isDisplayed(By by) {
 		try {
 			waitForElementToBeVisible(by);
+			logger.info("Element is displayed", getElementDescription(by));
+			ExtentManager.logStepsWithScreenshots(BaseClass.getDriver(), "Element is displayed: ", "Element is displayed: "+getElementDescription(by));
 			return driver.findElement(by).isDisplayed();
-
 		} catch (Exception e) {
 			logger.error("Element not displayed : " + e.getMessage());
+
+			ExtentManager.logfailureWithScreenshots(BaseClass.getDriver(), "Element not displayed : ",
+					getElementDescription(by));
 			return false;
 		}
 	}

@@ -23,7 +23,7 @@ public class BaseClass {
 
 	protected static Properties prop;
 	private static ActionDriver actionDriver;
-	protected WebDriver driver;
+	protected static WebDriver driver;
 
 	public static final Logger logger = LoggerManager.getLogger(BaseClass.class);
 
@@ -131,13 +131,13 @@ public class BaseClass {
 
 	// Driver getter Method public WebDriver getDriver() { return driver; }
 
-	// Driver setter method public void setDriver(WebDriver driver) { this.driver
-	// = driver; }
+	// Driver setter method 
+	public void setDriver(WebDriver driver) { this.driver= driver; }
 
 	// Static Wait for pause
 
 	// Getter Method for WebDriver
-	public WebDriver getDriver() {
+	public static WebDriver getDriver() {
 		if (driver == null) {
 
 			System.out.println("WebDriver is not initialized");
