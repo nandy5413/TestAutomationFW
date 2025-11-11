@@ -2,9 +2,13 @@
 
 <suite name= "OrangeHRM">
 	<test name = "OrangeHRMTest">
+	<listeners>
+		<listener class-name="com.orangehrm.listeners.TestListener"></listener>
+	</listeners>
 		<classes>
-				<class name="com.orangehrm.test.LoginPageTest"> </class>
-				<class name="com.orangehrm.test.HomePageTest"> </class>
+				<!--<class name="com.orangehrm.test.LoginPageTest"> </class>
+				<class name="com.orangehrm.test.HomePageTest"> </class>-->
+				<class name="com.orangehrm.test.ApiTest" />
 		</classes>
 	</test>
 	
